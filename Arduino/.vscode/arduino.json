@@ -1,0 +1,6 @@
+{
+    "configuration": "boot=optiboot,clock=external_16,serial=default,compiler_version=avrgcc5,timers=yes_millis,init=enable,es=disabled,bod=bod_2_7,co=disabled",
+    "board": "GyverCore:avr:nano",
+    "sketch": "main.ino\\main.ino",
+    "port": "COM3"
+}
