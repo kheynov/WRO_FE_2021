@@ -16,12 +16,12 @@
 #define SONIC_1_TRIG_PIN 5
 #define SONIC_1_ECHO_PIN 6
 
-#define SONIC_2_TRIG_PIN 9
+#define SONIC_2_TRIG_PIN 11
 #define SONIC_2_ECHO_PIN 10
 
 #define MOTOR_IN1_PIN 7
 #define MOTOR_IN2_PIN 8
-#define MOTOR_EN1_PIN 11
+#define MOTOR_EN1_PIN 9
 
 Servo servo;
 Ultrasonic left_sensor(SONIC_1_TRIG_PIN, SONIC_1_ECHO_PIN);
