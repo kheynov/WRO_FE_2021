@@ -5,7 +5,7 @@
         <script>
             var socket = io();
 
-            document.addEventListener('keydown', event => {
+            document.addEventListener('keypress', event => {
                 const e = {};
                 e.state = true;
                 switch (event.key) {
@@ -22,7 +22,7 @@
                         return;     
                 }
 
-                // console.log(JSON.stringify(e));
+                console.log(JSON.stringify(e));
                 socket.emit('inputs', JSON.stringify(e));
             });
 
