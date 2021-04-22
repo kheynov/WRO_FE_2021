@@ -1,7 +1,7 @@
 import eventlet
 import socketio
 import json
-import '../bridge'
+import bridge
 
 sio = socketio.Server()
 app = socketio.WSGIApp(sio, static_files={
