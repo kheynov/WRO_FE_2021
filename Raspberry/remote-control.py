@@ -23,13 +23,13 @@ def inputs(sid, data):
         if e['state'] == True:
             bridge.set_servo_angle(0)
         if e['state'] == False:
-            bridge.set_motor_power(45)
+            bridge.set_servo_power(45)
 
     if e['dir'] == 'right':
         if e['state'] == True:
             bridge.set_servo_angle(90)
         if e['state'] == False:
-            bridge.set_motor_power(45)
+            bridge.set_servo_power(45)
 
 
 if __name__ == '__main__':
