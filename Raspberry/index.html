@@ -6,6 +6,7 @@
             var socket = io();
 
             document.addEventListener('keypress', event => {
+                if (event.repeat === true) return;
                 const e = {};
                 e.state = true;
                 switch (event.key) {
@@ -27,6 +28,7 @@
             });
 
             document.addEventListener('keyup', event => {
+                if (event.repeat === true) return;
                 const e = {};
                 e.state = false;
                 switch (event.key) {
