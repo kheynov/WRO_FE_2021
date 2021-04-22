@@ -1,7 +1,7 @@
 import eventlet
 import socketio
 import json
-import bridge
+import '../bridge'
 
 sio = socketio.Server()
 app = socketio.WSGIApp(sio, static_files={
@@ -18,7 +18,7 @@ def inputs(sid, data):
             bridge.set_motor_power(100)
         if e.state == False:
             bridge.set_motor_power(0)
-            
+
     if e.dir == 'left':
         if e.state == True:
             bridge.set_servo_angle(0)
