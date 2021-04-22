@@ -13,22 +13,22 @@ def inputs(sid, data):
     e = json.loads(data)
     print(e)
 
-    if e.dir == 'forward':
-        if e.state == True:
+    if e['dir'] == 'forward':
+        if e['state'] == True:
             bridge.set_motor_power(100)
-        if e.state == False:
+        if e['state'] == False:
             bridge.set_motor_power(0)
 
-    if e.dir == 'left':
-        if e.state == True:
+    if e['dir'] == 'left':
+        if e['state'] == True:
             bridge.set_servo_angle(0)
-        if e.state == False:
+        if e['state'] == False:
             bridge.set_motor_power(45)
 
-    if e.dir == 'left':
-        if e.state == True:
+    if e['dir'] == 'left':
+        if e['state'] == True:
             bridge.set_servo_angle(90)
-        if e.state == False:
+        if e['state'] == False:
             bridge.set_motor_power(45)
 
 
