@@ -27,7 +27,8 @@ Servo servo;
 Ultrasonic left_sensor(SONIC_1_TRIG_PIN, SONIC_1_ECHO_PIN);
 Ultrasonic right_sensor(SONIC_2_TRIG_PIN, SONIC_2_ECHO_PIN);
 
-int servoPosition = (MAX_SERVO_VALUE - MIN_SERVO_VALUE) / 2;
+int servoPosition = ((MAX_SERVO_VALUE - MIN_SERVO_VALUE) / 2) + MIN_SERVO_VALUE;
+int motorPower = 0;
 
 byte controlByte = 0;
 byte valueByte = 0;
@@ -52,6 +53,7 @@ void loop()
 {
 	delay(100);
 	servo.write(servoPosition);
+	set_motor_power(motorPower);
 }
 
 void receiveData(int byteCount)
@@ -71,13 +73,14 @@ void receiveData(int byteCount)
 			case SERVO_ADDRESS:
 				Serial.print("Setting servo angle to: ");
 				Serial.println(valueByte);
-				servoPosition = valueByte;
+				servoPosition = map(valueByte, 0, 90, MIN_SERVO_VALUE, MAX_SERVO_VALUE);
 				responseByte = 0;
 				break;
 			case MOTOR_ADDRESS:
 				Serial.print("Setting main motor power to: ");
 				Serial.println(valueByte);
-				set_motor_power(valueByte);
+				motorPower = valueByte;
+				//				set_motor_power(valueByte);
 				responseByte = 0;
 				break;
 			case LEFT_SENSOR:
@@ -112,14 +115,15 @@ void set_motor_power(int power)
 	power = map(power, 0, 100, 0, 255);
 	if (power == 0)
 	{
-		digitalWrite(MOTOR_IN1_PIN, HIGH);
-        digitalWrite(MOTOR_IN2_PIN, HIGH);
-        digitalWrite(MOTOR_EN1_PIN, LOW);
+		digitalWrite(MOTOR_IN1_PIN, LOW);
+		digitalWrite(MOTOR_IN2_PIN, LOW);
+		digitalWrite(MOTOR_EN1_PIN, 0);
 	}
-	else{
-		digitalWrite(MOTOR_IN1_PIN, HIGH);
-        digitalWrite(MOTOR_IN2_PIN, HIGH);
-        analogWrite(MOTOR_EN1_PIN, power);
+	else
+	{
+		digitalWrite(7, LOW);
+		digitalWrite(8, HIGH);
+		digitalWrite(9, HIGH);
 	}
 }
 

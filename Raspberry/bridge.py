@@ -13,6 +13,7 @@
 
 import smbus
 import time
+import RPi.GPIO as gpio
 
 address = 0x04
 servo = 0x01
@@ -21,6 +22,10 @@ left_sensor = 0x0A
 right_sensor = 0x0B
 
 bus = smbus.SMBus(1)
+
+gpio.setmode(gpio.BCM)
+gpio.setup(17, gpio.OUT)#Turning led indicator on
+gpio.output(17, 1)
 
 def get_sensor_state(port):
     time.sleep(0.005)
@@ -39,3 +44,4 @@ def set_motor_power(speed):
 
 def close():
     bus.close()
+    gpio.cleanup()

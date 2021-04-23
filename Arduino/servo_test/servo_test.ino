@@ -6,14 +6,12 @@ int potpin = 0;
 int val;    
 
 void setup() {
-  myservo.attach(6);
+  myservo.attach(3);
   Serial.begin(9600);
 }
 
 void loop() {
-  val = analogRead(potpin);
-  val = map(val, 0, 1023, 55, 95);
-  myservo.write(val);
-  Serial.println(val);             
+  
+  myservo.write(110);
   delay(15);         
 }
