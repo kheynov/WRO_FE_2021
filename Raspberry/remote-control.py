@@ -19,6 +19,12 @@ def inputs(sid, data):
         if e['state'] == False:
             bridge.set_motor_power(0)
 
+    if e['dir'] == 'backward':
+        if e['state'] == True:
+            bridge.set_motor_power(-100)
+        if e['state'] == False:
+            bridge.set_motor_power(0)    
+
     if e['dir'] == 'left':
         if e['state'] == True:
             bridge.set_servo_angle(0)
