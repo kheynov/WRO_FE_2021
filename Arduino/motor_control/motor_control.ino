@@ -1,6 +1,6 @@
 #define MOTOR_IN1_PIN 7
 #define MOTOR_IN2_PIN 8
-#define MOTOR_EN1_PIN 11
+#define MOTOR_EN1_PIN 9
 #define pot_pin A0
 
 void setup()
@@ -12,7 +12,7 @@ void setup()
 }
 void loop()
 {
-    int val = analogRead(pot_pin);
+    int val = 1023;
     val = map(val, 0, 1023, 0, 255);
     if (val <= 20)
     {
