@@ -1,0 +1,53 @@
+<html>
+    <body>
+        <script src="https://cdn.socket.io/4.0.1/socket.io.js"></script>
+
+        <script>
+            var socket = io();
+
+            document.addEventListener('keypress', event => {
+                if (event.repeat === true) return;
+                const e = {};
+                e.state = true;
+                switch (event.key) {
+                    case 'w':
+                        e.dir = 'forward';
+                        break;
+                    case 'a':
+                        e.dir = 'left';
+                        break;
+                    case 'd':
+                        e.dir = 'right';
+                        break;
+                    default:
+                        return;     
+                }
+
+                console.log(JSON.stringify(e));
+                socket.emit('inputs', JSON.stringify(e));
+            });
+
+            document.addEventListener('keyup', event => {
+                if (event.repeat === true) return;
+                const e = {};
+                e.state = false;
+                switch (event.key) {
+                    case 'w':
+                        e.dir = 'forward';
+                        break;
+                    case 'a':
+                        e.dir = 'left';
+                        break;
+                    case 'd':
+                        e.dir = 'right';
+                        break;
+                    default:
+                        return;  
+                }
+
+                // console.log(JSON.stringify(e));
+                socket.emit('inputs', JSON.stringify(e));
+            });
+        </script>
+    </body>
+</html>
