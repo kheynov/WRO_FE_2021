@@ -1,27 +1,13 @@
-import RPi.GPIO as gpio
-import smbus
-import time
-import sys
+import bridge
+import cv
 
-bus = smbus.SMBus(1)
-address = 0x04
-time.sleep(1)
-
-def main():
-    gpio.setmode(gpio.BCM)
-    gpio.setup(17, gpio.OUT)
-    status = False
-    while 1:
-        gpio.output(17, status)
-        status = not status
-        bus.write_byte(address, 1 if status else 0)
-        print("Arduino answer to RPI:", bus.read_byte(address))
-        time.sleep(1)
+isRunning = True
 
 if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print('Interrupted')
-        gpio.cleanup()
-        sys.exit(0)
+    while isRunning:
+
+
+        try:
+            pass
+        except Keyboard:
+            isRunning == False
