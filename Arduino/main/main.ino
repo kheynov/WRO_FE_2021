@@ -120,6 +120,7 @@ void set_motor_power(int power)
 	}
 
 	power = map(power, 0, 100, 0, 255);
+	Serial.println(String(direction) + " # " + String(power));
 	if (power == 0)
 	{
 		digitalWrite(MOTOR_IN1_PIN, LOW);
