@@ -23,8 +23,8 @@ right_sensor = 0x0B
 
 bus = smbus.SMBus(1)
 
-gpio.setmode(GPIO.BCM)
-gpio.setup(17, GPIO.OUT)#Turning led indicator on
+gpio.setmode(gpio.BCM)
+gpio.setup(17, gpio.OUT)#Turning led indicator on
 gpio.output(17, 1)
 
 def get_sensor_state(port):
@@ -44,3 +44,4 @@ def set_motor_power(speed):
 
 def close():
     bus.close()
+    gpio.cleanup()
