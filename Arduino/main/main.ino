@@ -112,18 +112,30 @@ float measure_dist(int port)
 
 void set_motor_power(int power)
 {
+	char direction;
+	if (power >= 0) direction = 1;
+	else {
+		direction = -1;
+		power *= direction;
+	}
+
 	power = map(power, 0, 100, 0, 255);
 	if (power == 0)
 	{
 		digitalWrite(MOTOR_IN1_PIN, LOW);
 		digitalWrite(MOTOR_IN2_PIN, LOW);
-		digitalWrite(MOTOR_EN1_PIN, 0);
+		digitalWrite(MOTOR_EN1_PIN, LOW); // analog pin umer
 	}
 	else
 	{
-		digitalWrite(7, LOW);
-		digitalWrite(8, HIGH);
-		digitalWrite(9, HIGH);
+		if (direction == 1) {
+			digitalWrite(MOTOR_IN1_PIN, LOW);
+			digitalWrite(MOTOR_IN2_PIN, HIGH);
+		} else {
+			digitalWrite(MOTOR_IN1_PIN, HIGH);
+			digitalWrite(MOTOR_IN2_PIN, LOW);
+		}
+		digitalWrite(MOTOR_EN1_PIN, HIGH); // analog pin umer
 	}
 }
 
