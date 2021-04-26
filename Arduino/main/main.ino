@@ -67,7 +67,8 @@ void receiveData(int byteCount)
 		else
 		{
 			valueByte = Wire.read();
-
+			Serial.print("Received: ");
+			Serial.println(valueByte);
 			switch (controlByte)
 			{
 			case SERVO_ADDRESS:
@@ -112,15 +113,15 @@ float measure_dist(int port)
 
 void set_motor_power(int power)
 {
-	char direction;
-	if (power >= 0) direction = 1;
+	int direction;
+	if (power <= 100) direction = 1;
 	else {
 		direction = -1;
 		power *= direction;
 	}
 
 	power = map(power, 0, 100, 0, 255);
-	Serial.println(String(direction) + " # " + String(power));
+	Serial.println(direction);
 	if (power == 0)
 	{
 		digitalWrite(MOTOR_IN1_PIN, LOW);
