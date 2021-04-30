@@ -39,7 +39,10 @@ def set_servo_angle(angle):
     bus.write_byte(address, angle)
 
 def set_motor_power(speed):
+    if (speed < 0):
+        speed = math.abs(speed) + 100
     bus.write_byte(address, drive_motor)
+    print(speed)
     bus.write_byte(address, speed)
 
 def close():

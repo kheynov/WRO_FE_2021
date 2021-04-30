@@ -13,6 +13,7 @@
 #define MAX_SERVO_VALUE 110
 
 #define SERVO_PIN 3
+
 #define SONIC_1_TRIG_PIN 5
 #define SONIC_1_ECHO_PIN 6
 
@@ -22,6 +23,7 @@
 #define MOTOR_IN1_PIN 7
 #define MOTOR_IN2_PIN 8
 #define MOTOR_EN1_PIN 9
+
 
 Servo servo;
 Ultrasonic left_sensor(SONIC_1_TRIG_PIN, SONIC_1_ECHO_PIN);
@@ -51,7 +53,7 @@ void setup()
 
 void loop()
 {
-	delay(100);
+	delay(10);
 	servo.write(servoPosition);
 	set_motor_power(motorPower);
 }
@@ -78,7 +80,7 @@ void receiveData(int byteCount)
 				responseByte = 0;
 				break;
 			case MOTOR_ADDRESS:
-				Serial.print("Setting main motor power to: ");
+				// Serial.print("Setting main motor power to: ");
 				Serial.println(valueByte);
 				motorPower = valueByte;
 				//				set_motor_power(valueByte);
@@ -113,31 +115,34 @@ float measure_dist(int port)
 
 void set_motor_power(int power)
 {
-	int direction;
-	if (power <= 100) direction = 1;
-	else {
-		direction = -1;
-		power *= direction;
+	bool direction = true;
+	if(power > 100){
+		direction = false;
+		power -= 100;
+	}
+	else{
+		direction = true;
 	}
 
+
 	power = map(power, 0, 100, 0, 255);
-	Serial.println(direction);
+	Serial.println(power);
 	if (power == 0)
 	{
 		digitalWrite(MOTOR_IN1_PIN, LOW);
 		digitalWrite(MOTOR_IN2_PIN, LOW);
-		digitalWrite(MOTOR_EN1_PIN, LOW); // analog pin umer
+		analogWrite(MOTOR_EN1_PIN, 0); // analog pin umer
 	}
 	else
 	{
-		if (direction == 1) {
+		if (direction) {
 			digitalWrite(MOTOR_IN1_PIN, LOW);
 			digitalWrite(MOTOR_IN2_PIN, HIGH);
 		} else {
 			digitalWrite(MOTOR_IN1_PIN, HIGH);
 			digitalWrite(MOTOR_IN2_PIN, LOW);
 		}
-		digitalWrite(MOTOR_EN1_PIN, HIGH); // analog pin umer
+		analogWrite(MOTOR_EN1_PIN, 255); // analog pin umer
 	}
 }
 

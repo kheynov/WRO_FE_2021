@@ -12,8 +12,7 @@ void setup()
 }
 void loop()
 {
-    int val = 1023;
-    val = map(val, 0, 1023, 0, 255);
+    int val = 200;
     if (val <= 20)
     {
         digitalWrite(MOTOR_IN1_PIN, HIGH);
