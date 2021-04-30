@@ -12,6 +12,7 @@
 # 2 byte - DATA (if requied)
 
 import smbus
+import math
 import time
 import RPi.GPIO as gpio
 
@@ -42,7 +43,6 @@ def set_motor_power(speed):
     if (speed < 0):
         speed = math.abs(speed) + 100
     bus.write_byte(address, drive_motor)
-    print(speed)
     bus.write_byte(address, speed)
 
 def close():
